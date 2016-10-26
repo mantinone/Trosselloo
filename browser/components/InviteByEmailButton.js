@@ -23,7 +23,8 @@ class InviteByEmailButton extends ToggleComponent {
 
     return <span ref="root" className="InviteByEmailButton">
       <Button type="invisible" className="MenuSideBar-button" onClick={this.toggle}>
-        Invite By Email
+        <Icon type='user-plus' />
+        Add Members...
       </Button>
       {inviteByEmail}
     </span>
