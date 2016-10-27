@@ -25,16 +25,14 @@ export default class LeaveBoardButton extends Component {
   }
 
   render(){
-    return <Button type="invisible">
-      <ConfirmationLink
-        className="BoardShowPage-button BoardShowPage-DeleteBoardButton"
-        onConfirm={this.leaveBoard}
-        buttonName="Leave Board"
-        title='Leave Board?'
-        message='Are you sure you want to leave this board?'
-      >
-        Leave Board
-      </ConfirmationLink>
-    </Button>
+    return <ConfirmationLink
+      className='MenuSideBar-options'
+      onConfirm={this.leaveBoard}
+      buttonName="Leave Board"
+      title='Leave Board?'
+      message='Are you sure you want to leave this board?'
+    >
+      Leave Board
+    </ConfirmationLink>
   }
 }
