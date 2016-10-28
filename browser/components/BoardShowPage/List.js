@@ -65,17 +65,19 @@ export default class List extends Component {
       .filter(card => card.list_id === list.id)
       .sort((a, b) => a.order - b.order)
 
-    const cardNodes = cards.map((card, index) =>
-      <Card
-        editable
-        key={card.id}
-        card={card}
-        index={index}
-        ghosted={dragging && card.id === dragging.cardId}
-        board={board}
-        list={list}
-      />
-    )
+    const cardNodes = cards
+      .filter(card => !card.archived)
+      .map((card, index) =>
+        <Card
+          editable
+          key={card.id}
+          card={card}
+          index={index}
+          ghosted={dragging && card.id === dragging.cardId}
+          board={board}
+          list={list}
+        />
+      )
 
     let newCardForm, newCardLink
     if (this.state.creatingCard) {
