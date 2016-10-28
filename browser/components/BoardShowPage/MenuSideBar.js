@@ -79,16 +79,15 @@ const DownloadBoardButton = (props) => {
 
 const BoardMember = (props) => {
   const { user } = props
-  return <div className='MenuSideBar-member'>
+  return <span className='MenuSideBar-member'>
     <img src={user.avatar_url} className='MenuSideBar-member-img' />
-  </div>
+  </span>
 }
 
 const MenuSideBarMain = (props) => {
-  const boardMembers = props.board.users.map( user => {
-    console.log('userlog', user );
-    return <BoardMember key={user.id} user={user} />
-  })
+  const boardMembers = props.board.users.map( user =>
+    <BoardMember key={user.id} user={user} />
+  )
   return <div className='MenuSideBar'>
     <div className="MenuSideBar-header" >
       Menu
