@@ -204,7 +204,7 @@ export default class CardModal extends Component {
                     defaultValue=''
                   />
                   <img className="CardModal-comments-userimage" src={session.user.avatar_url}></img>
-                  <input type="submit" value="Send"/>
+                  <input type="submit" className="CardModal-comments-submit" value="Send"/>
                 </Form>
               </div>
             </div>
