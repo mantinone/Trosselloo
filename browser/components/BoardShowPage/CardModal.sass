@@ -23,24 +23,35 @@
     min-width: 700px
     max-width: 700px
     min-height: 300px
-    padding: 10px
+    padding: 13px
     border-radius: 5px
     background-color: #e1e3ea
     display: flex
     flex-direction: column
   &-header
-    padding-top: 5px
+    padding-top: 7px
     text-align: left
     position: relative
+    display: flex
     flex-direction: column
-    &-name, &-icon
+    &-title, &-icon
       display: inline
-      font-size: 1.2em
     &-icon
+      font-size: .9em
       float: left
       color: grey
-    &-name
+      flex-grow: 1
+    &-title
+      font-size: 1.2em
       font-weight: bold
+      display: flex
+      flex-direction: row
+    &-title-content
+      flex-grow: 20
+    &-exit
+      position: absolute
+      right: 0
+      top: 0
     &-Edit
       & textarea
         position: absolute
@@ -108,7 +119,15 @@
         color: grey
       &-cancel
   &-comments
+    display: flex
+    flex-direction: column
+    &-Form-content
+      display: flex
+      flex-direction: row
     &-header
+      display: flex
+      flex-direction: row
+    &-title
       font-size: 1.1em
       font-weight: bold
       padding: 10px 0

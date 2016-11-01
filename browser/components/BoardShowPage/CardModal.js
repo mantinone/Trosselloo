@@ -168,7 +168,7 @@ export default class CardModal extends Component {
       <Link className="CardModal-header-Edit-cancel" onClick={this.stopEditingName}>
         <Icon type="times" />
       </Link>
-      </Form> : <div onClick={this.editName} className="CardModal-header-name">{this.props.card.content}</div>
+      </Form> : <div onClick={this.editName} className="CardModal-header-title-content">{this.props.card.content}</div>
 
     return <div className="CardModal">
       <div onClick={this.props.onClose} className="CardModal-shroud">
@@ -178,9 +178,12 @@ export default class CardModal extends Component {
           <div className="CardModal-header">
             <div className="CardModal-header-title">
               <div className="CardModal-header-icon">
-              <Icon type="window-maximize" size='2'/>
+                <Icon type="window-maximize" size='2'/>
               </div>
               {editCardNameForm}
+              <div onClick={this.props.onClose} className="CardModal-header-exit">
+                <Icon type="times" size='2'/>
+              </div>
             </div>
             <div className="CardModal-header-list">
               <span className="CardModal-header-list-title">
@@ -202,17 +205,24 @@ export default class CardModal extends Component {
                 {editDescriptionForm}
               </div>
               <div className="CardModal-comments">
-                <div className="CardModal-comments-icon">
-                <Icon size="2" type="comment-o"/>
+                <div className="CardModal-comments-header">
+                  <span className="CardModal-comments-icon">
+                    <Icon size="2" type="comment-o"/>
+                  </span>
+                  <span className="CardModal-comments-title">
+                    Add Comment:
+                  </span>
                 </div>
-                <div className="CardModal-comments-header">Add Comment:</div>
+
                 <Form className="CardModal-comments-Form">
-                  <textarea
-                    className="CardModal-comments-Form-input"
-                    ref="comment"
-                    defaultValue=''
-                  />
-                  <img className="CardModal-comments-userimage" src={session.user.avatar_url}></img>
+                  <div className="CardModal-comments-Form-content">
+                    <img className="CardModal-comments-userimage" src={session.user.avatar_url}></img>
+                    <textarea
+                      className="CardModal-comments-Form-input"
+                      ref="comment"
+                      defaultValue=''
+                    />
+                  </div>
                   <input type="submit" className="CardModal-comments-submit" value="Send"/>
                 </Form>
               </div>
