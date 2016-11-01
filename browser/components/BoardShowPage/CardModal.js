@@ -181,8 +181,8 @@ export default class CardModal extends Component {
             </div>
             {editCardNameForm}
           </div>
-          <div className="CardModal-details">
-            <div>
+          <div className="CardModal-body">
+            <div className="CardModal-details">
               <span className="CardModal-details-list">in list {this.props.list.name}</span><span className="CardModal-details-eye"><Icon size="1" type="eye"  /></span>
               <div className="CardModal-description">
                 <div className="CardModal-description-title">
@@ -208,21 +208,20 @@ export default class CardModal extends Component {
                 </Form>
               </div>
             </div>
-          </div>
-        <div className="CardModal-controls">
-          <div className="CardModal-controls-add">
-            <span className="CardModal-controls-title">Add</span>
-            <div className="CardModal-controls-add-buttons">
-              <Button>Members</Button>
+            <div className="CardModal-controls">
+              <div className="CardModal-controls-add">
+                <span className="CardModal-controls-title">Add</span>
+                <div className="CardModal-controls-add-buttons">
+                  <Button>Members</Button>
+                </div>
+              </div>
+              <div className="CardModal-controls-actions">
+                <span className="CardModal-controls-title">Actions</span>
+                <ArchiveCardButton className="CardModal-controls-archive"/>
+              </div>
             </div>
           </div>
-          <div className="CardModal-controls-actions">
-            <span className="CardModal-controls-title">Actions</span>
-            <ArchiveCardButton className="CardModal-controls-archive"/>
-          </div>
         </div>
-
-      </div>
       </div>
     </div>
   }

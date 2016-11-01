@@ -1,5 +1,7 @@
 @import "../../style.sass"
 
+*
+  // border: 1px dotted red
 .CardModal
   &-shroud, &-stage
     position: fixed
@@ -18,14 +20,15 @@
     align-items: center
   &-window
     pointer-events: auto
-    min-width: 600px
-    max-width: 600px
+    min-width: 700px
+    max-width: 700px
     min-height: 300px
     padding: 10px
-    margin: 50px
     border-radius: 5px
     background-color: #e1e3ea
-    position: relative
+    // position: relative
+    display: flex
+    flex-direction: column
   &-header
     padding-top: 5px
     text-align: left
@@ -59,10 +62,14 @@
         position: absolute
         top: 0
         right: -20px
+  &-body
+    display: flex
+    flex-direction: row
+    justify-content: space-between
   &-details
-    width: 79%
-    display: inline
-    float: left
+    display: flex
+    flex-direction: column
+    flex-grow: 3
     padding-top: 30px
     &-list, &-board
       color: grey
@@ -76,11 +83,9 @@
       font-size: .8em
       color: grey
   &-controls
-    width: 19%
-    top: 0
-    right: 0
-    display: inline
-    float: right
+    display: flex
+    flex-direction: column
+    flex-grow: 1
     &-title
       font-weight: bold
     &-add
@@ -88,15 +93,10 @@
     &-actions
       min-height: 50px
     &-archive
-      display: block
   &-description
-    align-items: center
     margin-top: 10px
     min-height: 80px
     min-width: 200px
-    position: absolute
-    bottom: 130px
-    left: 50px
     min-width: 400px
     &-title
       margin-bottom: 5px
@@ -107,40 +107,21 @@
         display: inline
         color: black
       &-button
-        float: left
         margin-left: 5px
-        position: absolute
-        left: 75px
-        top: 0
         color: grey
       &-cancel
-       position: absolute
-       left: -30px
-       top: 25px
   &-comments
-    position: absolute
-    bottom: 5px
-    left: 50px
-    min-width: 400px
     &-header
       font-size: 1.1em
       font-weight: bold
       padding: 10px 0
     &-icon
-      position: absolute
-      left: -33px
-      top: 11px
       color: grey
     &-userimage
       max-width: 30px
       max-height: 30px
-      position: absolute
-      left: -38px
-      top: 40px
       border-radius: 4px
   &-name
-    position: relative
-    overflow-wrap: break-word
     max-width: 100%
 input[type="submit"].CardModal-comments-submit
   max-width: 25%
