@@ -3,10 +3,11 @@ import Link from '../Link'
 import Icon from '../Icon'
 import Form from '../Form'
 import Card from './Card'
+import Button from '../Button'
+import ArchiveButton from './ArchiveButton'
 import boardStore from '../../stores/boardStore'
 import './CardModal.sass'
 import $ from 'jquery'
-import ArchiveButton from './ArchiveButton'
 
 export default class CardModal extends Component {
   static propTypes = {
@@ -176,14 +177,13 @@ export default class CardModal extends Component {
         <div className="CardModal-window">
           <div className="CardModal-header">
             <div className="CardModal-header-icon">
-            <Icon type="credit-card" size='2'/>
+            <Icon type="window-maximize" size='2'/>
             </div>
             {editCardNameForm}
           </div>
           <div className="CardModal-details">
-            <div className="CardModal-details-margin">
-              <span className="CardModal-details-list">in List: {this.props.list.name}</span>
-              <span className="CardModal-details-board">in Board: {this.props.board.name}</span>
+            <div>
+              <span className="CardModal-details-list">in list {this.props.list.name}</span><span className="CardModal-details-eye"><Icon size="1" type="eye"  /></span>
               <div className="CardModal-description">
                 <div className="CardModal-description-title">
                   Description
@@ -213,6 +213,7 @@ export default class CardModal extends Component {
           <div className="CardModal-controls-add">
             <span className="CardModal-controls-title">Add</span>
             <div className="CardModal-controls-add-buttons">
+              <Button>Members</Button>
             </div>
           </div>
           <div className="CardModal-controls-actions">
