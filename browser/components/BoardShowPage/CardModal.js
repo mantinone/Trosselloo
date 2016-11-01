@@ -176,14 +176,23 @@ export default class CardModal extends Component {
       <div className="CardModal-stage">
         <div className="CardModal-window">
           <div className="CardModal-header">
-            <div className="CardModal-header-icon">
-            <Icon type="window-maximize" size='2'/>
+            <div className="CardModal-header-title">
+              <div className="CardModal-header-icon">
+              <Icon type="window-maximize" size='2'/>
+              </div>
+              {editCardNameForm}
             </div>
-            {editCardNameForm}
+            <div className="CardModal-header-list">
+              <span className="CardModal-header-list-title">
+                in list {this.props.list.name}
+              </span>
+              <span className="CardModal-header-list-eye">
+                <Icon size="1" type="eye"  />
+              </span>
+            </div>
           </div>
           <div className="CardModal-body">
             <div className="CardModal-details">
-              <span className="CardModal-details-list">in list {this.props.list.name}</span><span className="CardModal-details-eye"><Icon size="1" type="eye"  /></span>
               <div className="CardModal-description">
                 <div className="CardModal-description-title">
                   Description
