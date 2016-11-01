@@ -157,87 +157,83 @@ export default class CardModal extends Component {
         </Link>
         </Form> : <div onClick={this.editDescription} className="CardModal-description-text">{description}</div>
     const editCardNameForm = this.state.editingName ?
-    <Form className="CardModal-header-Edit" onSubmit={this.updateName}>
+    <Form className="CardModal-content-Edit" onSubmit={this.updateName}>
       <textarea
         onBlur={this.nameOnBlur}
-        className="CardModal-header-Edit-input"
+        className="CardModal-content-Edit-input"
         onKeyDown={this.nameOnKeyDown}
         ref="content"
         defaultValue={this.props.card.content}
       />
-      <Link className="CardModal-header-Edit-cancel" onClick={this.stopEditingName}>
+      <Link className="CardModal-content-Edit-cancel" onClick={this.stopEditingName}>
         <Icon type="times" />
       </Link>
-      </Form> : <div onClick={this.editName} className="CardModal-header-title-content">{this.props.card.content}</div>
+      </Form> : <div onClick={this.editName} className="CardModal-content-title-content">{this.props.card.content}</div>
 
     return <div className="CardModal">
       <div onClick={this.props.onClose} className="CardModal-shroud">
       </div>
       <div className="CardModal-stage">
         <div className="CardModal-window">
-          <div className="CardModal-header">
-            <div className="CardModal-header-title">
-              <div className="CardModal-header-icon">
+          <div className="CardModal-body">
+            <div className="CardModal-content">
+              <div className="CardModal-content-icon">
                 <Icon type="window-maximize" size='2'/>
               </div>
-              {editCardNameForm}
-              <div onClick={this.props.onClose} className="CardModal-header-exit">
-                <Icon type="times" size='2'/>
+              <div className="CardModal-content-copy">
+                <div className="CardModal-content-title">
+                  {editCardNameForm}
+                </div>
+                <div className="CardModal-content-list">
+                  <span className="CardModal-content-list-title">
+                    in list {this.props.list.name}
+                  </span>
+                  <span className="CardModal-content-list-eye">
+                    <Icon size="1" type="eye"  />
+                  </span>
+                </div>
+                <div className="CardModal-description">
+                  <div className="CardModal-description-title">
+                    Description
+                    <Link className="CardModal-description-Edit-button" onClick={this.editDescription}>
+                    Edit
+                  </Link></div>
+                  {editDescriptionForm}
+                </div>
               </div>
             </div>
-            <div className="CardModal-header-list">
-              <span className="CardModal-header-list-title">
-                in list {this.props.list.name}
-              </span>
-              <span className="CardModal-header-list-eye">
-                <Icon size="1" type="eye"  />
-              </span>
+            <div className="CardModal-comments">
+              <div className="CardModal-comments-content">
+                <span className="CardModal-comments-icon">
+                  <Icon size="2" type="comment-o"/>
+                </span>
+                <span className="CardModal-comments-title">
+                  Add Comment:
+                </span>
+              </div>
+              <Form className="CardModal-comments-Form">
+                <div className="CardModal-comments-Form-content">
+                  <img className="CardModal-comments-userimage" src={session.user.avatar_url}></img>
+                  <textarea
+                    className="CardModal-comments-Form-input"
+                    ref="comment"
+                    defaultValue=''
+                  />
+                </div>
+                <input type="submit" className="CardModal-comments-submit" value="Send"/>
+              </Form>
             </div>
           </div>
-          <div className="CardModal-body">
-            <div className="CardModal-details">
-              <div className="CardModal-description">
-                <div className="CardModal-description-title">
-                  Description
-                  <Link className="CardModal-description-Edit-button" onClick={this.editDescription}>
-                  Edit
-                </Link></div>
-                {editDescriptionForm}
-              </div>
-              <div className="CardModal-comments">
-                <div className="CardModal-comments-header">
-                  <span className="CardModal-comments-icon">
-                    <Icon size="2" type="comment-o"/>
-                  </span>
-                  <span className="CardModal-comments-title">
-                    Add Comment:
-                  </span>
-                </div>
-
-                <Form className="CardModal-comments-Form">
-                  <div className="CardModal-comments-Form-content">
-                    <img className="CardModal-comments-userimage" src={session.user.avatar_url}></img>
-                    <textarea
-                      className="CardModal-comments-Form-input"
-                      ref="comment"
-                      defaultValue=''
-                    />
-                  </div>
-                  <input type="submit" className="CardModal-comments-submit" value="Send"/>
-                </Form>
+          <div className="CardModal-controls">
+            <div className="CardModal-controls-add">
+              <span className="CardModal-controls-title">Add</span>
+              <div className="CardModal-controls-add-buttons">
+                <Button>Members</Button>
               </div>
             </div>
-            <div className="CardModal-controls">
-              <div className="CardModal-controls-add">
-                <span className="CardModal-controls-title">Add</span>
-                <div className="CardModal-controls-add-buttons">
-                  <Button>Members</Button>
-                </div>
-              </div>
-              <div className="CardModal-controls-actions">
-                <span className="CardModal-controls-title">Actions</span>
-                <ArchiveCardButton className="CardModal-controls-archive"/>
-              </div>
+            <div className="CardModal-controls-actions">
+              <span className="CardModal-controls-title">Actions</span>
+              <ArchiveCardButton className="CardModal-controls-archive"/>
             </div>
           </div>
         </div>

@@ -27,31 +27,18 @@
     border-radius: 5px
     background-color: #e1e3ea
     display: flex
-    flex-direction: column
-  &-header
+    flex-direction: row
+  &-content
     padding-top: 7px
-    text-align: left
-    position: relative
     display: flex
-    flex-direction: column
-    &-title, &-icon
-      display: inline
+    flex-direction: row
     &-icon
       font-size: .9em
-      float: left
       color: grey
-      flex-grow: 1
+      flex: 0 0 70px
     &-title
       font-size: 1.2em
       font-weight: bold
-      display: flex
-      flex-direction: row
-    &-title-content
-      flex-grow: 20
-    &-exit
-      position: absolute
-      right: 0
-      top: 0
     &-Edit
       & textarea
         position: absolute
@@ -72,40 +59,18 @@
         right: -20px
   &-body
     display: flex
-    flex-direction: row
-    justify-content: space-between
-  &-details
-    display: flex
     flex-direction: column
-    flex-grow: 3
-    padding-top: 30px
-    &-list, &-board
-      color: grey
-    &-list
-      margin-left: 13px
-      font-size: .85em
-    &-board
-      margin-left: 20px
-    &-eye
-      padding-left: 8px
-      font-size: .8em
-      color: grey
   &-controls
     display: flex
     flex-direction: column
-    flex-grow: 1
+    flex: 0 0 100px
     &-title
       font-weight: bold
     &-add
       min-height: 100px
     &-actions
       min-height: 50px
-    &-archive
   &-description
-    margin-top: 10px
-    min-height: 80px
-    min-width: 200px
-    min-width: 400px
     &-title
       margin-bottom: 5px
       color: grey
@@ -117,20 +82,13 @@
       &-button
         margin-left: 5px
         color: grey
-      &-cancel
   &-comments
-    display: flex
-    flex-direction: column
-    &-Form-content
-      display: flex
-      flex-direction: row
     &-header
       display: flex
       flex-direction: row
     &-title
       font-size: 1.1em
       font-weight: bold
-      padding: 10px 0
     &-icon
       color: grey
     &-userimage
