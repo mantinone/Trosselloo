@@ -28,6 +28,10 @@
     background-color: #e1e3ea
     display: flex
     flex-direction: row
+  &-body
+    display: flex
+    flex-direction: column
+    flex: 1
   &-content
     padding-top: 7px
     display: flex
@@ -82,10 +86,8 @@
         margin-left: 5px
         color: grey
   &-comments
-    position: absolute
-    bottom: 5px
-    left: 50px
-    min-width: 400px
+    display: flex
+    flex-direction: row
     &-Form-input
       border-radius: 3px
       // border: .1em solid grey

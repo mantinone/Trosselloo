@@ -236,10 +236,10 @@ export default class CardModal extends Component {
                 <Button>Members</Button>
               </div>
             </div>
-          </div>
-          <div className="CardModal-controls-actions">
-            <span className="CardModal-controls-title">Actions</span>
-            <ArchiveCardButton card={this.props.card} className="CardModal-controls-archive"/>
+            <div className="CardModal-controls-actions">
+              <span className="CardModal-controls-title">Actions</span>
+              <ArchiveCardButton card={this.props.card} className="CardModal-controls-archive"/>
+            </div>
           </div>
         </div>
       </div>
