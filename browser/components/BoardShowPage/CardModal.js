@@ -222,7 +222,7 @@ export default class CardModal extends Component {
                   <textarea
                     className="CardModal-comments-Form-input"
                     ref="comment"
-                    defaultValue='Write a comment...'
+                    placeholder='Write a comment...'
                   />
                 </div>
                 <input type="submit" className="CardModal-comments-submit" value="Send"/>
