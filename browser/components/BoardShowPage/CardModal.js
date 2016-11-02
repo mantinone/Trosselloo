@@ -268,17 +268,19 @@ const ArchiveCardButton = (props) => {
 class EditCardNameForm extends Component {
   constructor(props) {
     super(props)
-    this.state = {value: this.props.card.content}
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.state = {
+      value: this.props.card.content
+    }
+    this.setValue = this.setValue.bind(this)
+    this.updateName = this.updateName.bind(this)
   }
-  handleChange(event) {
+
+  setValue(event) {
     this.setState({value: event.target.value})
   }
 
-  updateName2(){
+  updateName(){
     const card = this.props.card
-    console.log("banana", card.content)
     $.ajax({
       method: 'post',
       url: `/api/cards/${card.id}`,
@@ -288,18 +290,15 @@ class EditCardNameForm extends Component {
     })
   }
 
-  handleSubmit(event) {
-    console.log('Text field value is: ' + this.state.value)
-    updateName2(this.state.value)
-  }
-
   render() {
     return (
       <div>
-        <input type="text"
+        <input
+          type="text"
           value={this.state.value}
-          onChange={this.handleChange}
-          onBlur={this.updateName2} />
+          onChange={this.setValue}
+          onBlur={this.updateName}
+        />
       </div>
     )
   }
