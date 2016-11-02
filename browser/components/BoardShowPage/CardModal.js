@@ -203,17 +203,21 @@ export default class CardModal extends Component {
               </div>
             </div>
             <div className="CardModal-comments">
+              <div className="CardModal-comments-icon">
+                <Icon size="2" type="comment-o"/>
+              </div>
               <div className="CardModal-comments-content">
-                <span className="CardModal-comments-icon">
-                  <Icon size="2" type="comment-o"/>
-                </span>
                 <span className="CardModal-comments-title">
                   Add Comment:
                 </span>
               </div>
+            </div>
+            <div className="CardModal-comments">
+              <div className="CardModal-comments-imgcontain">
+                <img className="CardModal-comments-userimage" src={session.user.avatar_url}></img>
+              </div>
               <Form className="CardModal-comments-Form">
                 <div className="CardModal-comments-Form-content">
-                  <img className="CardModal-comments-userimage" src={session.user.avatar_url}></img>
                   <textarea
                     className="CardModal-comments-Form-input"
                     ref="comment"

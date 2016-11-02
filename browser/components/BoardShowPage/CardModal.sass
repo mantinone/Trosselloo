@@ -35,10 +35,12 @@
     &-icon
       font-size: .9em
       color: grey
-      flex: 0 0 70px
+      flex: 0 0 45px
     &-title
       font-size: 1.2em
       font-weight: bold
+    &-copy
+      flex: 1
     &-Edit
       & textarea
         position: absolute
@@ -60,10 +62,11 @@
   &-body
     display: flex
     flex-direction: column
+    flex: 1
   &-controls
     display: flex
     flex-direction: column
-    flex: 0 0 100px
+    flex: 0 0 130px
     &-title
       font-weight: bold
     &-add
@@ -83,6 +86,8 @@
         margin-left: 5px
         color: grey
   &-comments
+    display: flex
+    flex-direction: row
     &-header
       display: flex
       flex-direction: row
@@ -91,10 +96,17 @@
       font-weight: bold
     &-icon
       color: grey
+      flex: 0 0 45px
     &-userimage
       max-width: 30px
       max-height: 30px
       border-radius: 4px
+    &-content
+      flex: 1
+    &-imgcontain
+      flex: 0 0 45px
+    &-Form
+      flex: 1
   &-name
     max-width: 100%
 input[type="submit"].CardModal-comments-submit
