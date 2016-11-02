@@ -51,7 +51,8 @@ export default class ConfirmationLink extends Component {
       /> : null
 
     return <span className='ConfirmationLink'>
-      <Link className={this.props.className} onClick={this.openDialog} >
+      <Link
+        className={this.props.className} onClick={this.openDialog} >
         {this.props.children}
       </Link>
       {confirmationDialog}

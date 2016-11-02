@@ -11,6 +11,7 @@ const ArchiveButton = (props) => {
     title={props.confirmationTitle}
     message={props.confirmationMessage}
     className={className}
+    card={props.card}
   >
     <Icon size={props.size} type='archive'/>
   </ConfirmationLink>

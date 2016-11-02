@@ -157,19 +157,20 @@ export default class CardModal extends Component {
         </Link>
         </Form> : <div onClick={this.editDescription} className="CardModal-description-text">{description}</div>
     const editCardNameForm = this.state.editingName ?
-    <Form className="CardModal-content-Edit" onSubmit={this.updateName}>
-      <textarea
-        onBlur={this.nameOnBlur}
-        className="CardModal-content-Edit-input"
-        onKeyDown={this.nameOnKeyDown}
-        ref="content"
-        defaultValue={this.props.card.content}
-      />
-      <Link className="CardModal-content-Edit-cancel" onClick={this.stopEditingName}>
-        <Icon type="times" />
-      </Link>
-      </Form> : <div onClick={this.editName} className="CardModal-content-title-content">{this.props.card.content}</div>
-
+    <div className="CardModal-header-name">
+      <Form className="CardModal-header-Edit" onSubmit={this.updateName}>
+        <textarea
+          onBlur={this.nameOnBlur}
+          className="CardModal-header-Edit-input"
+          onKeyDown={this.nameOnKeyDown}
+          ref="content"
+          defaultValue={this.props.card.content}
+        />
+        <Link className="CardModal-header-Edit-cancel" onClick={this.stopEditingName}>
+          <Icon type="times" />
+        </Link>
+        </Form>
+      </div> : <div onClick={this.editName} className="CardModal-header-name">{this.props.card.content}</div>
     return <div className="CardModal">
       <div onClick={this.props.onClose} className="CardModal-shroud">
       </div>
@@ -221,7 +222,7 @@ export default class CardModal extends Component {
                   <textarea
                     className="CardModal-comments-Form-input"
                     ref="comment"
-                    defaultValue=''
+                    defaultValue='Write a comment...'
                   />
                 </div>
                 <input type="submit" className="CardModal-comments-submit" value="Send"/>
@@ -235,10 +236,10 @@ export default class CardModal extends Component {
                 <Button>Members</Button>
               </div>
             </div>
-            <div className="CardModal-controls-actions">
-              <span className="CardModal-controls-title">Actions</span>
-              <ArchiveCardButton className="CardModal-controls-archive"/>
-            </div>
+          </div>
+          <div className="CardModal-controls-actions">
+            <span className="CardModal-controls-title">Actions</span>
+            <ArchiveCardButton card={this.props.card} className="CardModal-controls-archive"/>
           </div>
         </div>
       </div>
@@ -262,5 +263,6 @@ const ArchiveCardButton = (props) => {
     confirmationMessage='Are you sure you want to archive this card?'
     onClick={onClick}
     className={props.className}
+    card={props.card}
   />
 }
