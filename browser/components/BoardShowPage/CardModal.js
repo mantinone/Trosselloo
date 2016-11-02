@@ -139,6 +139,19 @@ export default class CardModal extends Component {
     })
   }
 
+  updateNameNew(content){
+    const { card } = this.props
+    $.ajax({
+      method: 'post',
+      url: `/api/cards/${card.id}`,
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify(content),
+    }).then(() => {
+      boardStore.reload()
+    })
+  }
+
 
   render(){
     const { session } = this.context
@@ -156,7 +169,7 @@ export default class CardModal extends Component {
           <Icon type="times" />
         </Link>
         </Form> : <div onClick={this.editDescription} className="CardModal-description-text">{description}</div>
-    const editCardNameForm = this.state.editingName ?
+    const editCardNameFormOld = this.state.editingName ?
     <div className="CardModal-header-name">
       <Form className="CardModal-header-Edit" onSubmit={this.updateName}>
         <textarea
@@ -183,7 +196,7 @@ export default class CardModal extends Component {
               </div>
               <div className="CardModal-content-copy">
                 <div className="CardModal-content-title">
-                  {editCardNameForm}
+                  <EditCardNameForm />
                 </div>
                 <div className="CardModal-content-list">
                   <span className="CardModal-content-list-title">
@@ -265,4 +278,33 @@ const ArchiveCardButton = (props) => {
     className={props.className}
     card={props.card}
   />
+}
+const editCardNameForm = (props) => {
+  return <div>
+    <Form>
+
+    </Form>
+  </div>
+}
+
+class EditCardNameForm extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {value: ''}
+    this.handleChange = this.handleChange.bind(this)
+  }
+  handleChange(event) {
+    this.setState({value: event.target.value})
+  }
+
+  render() {
+    return (
+      <div>
+        <input type="text"
+          placeholder="Hello!"
+          value={this.state.value}
+          onChange={this.handleChange} />
+      </div>
+    )
+  }
 }
