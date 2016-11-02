@@ -134,24 +134,9 @@ export default class CardModal extends Component {
       dataType: "json",
       data: JSON.stringify(content),
     }).then(() => {
-      this.stopEditingName()
       boardStore.reload()
     })
   }
-
-  updateNameNew(content){
-    const { card } = this.props
-    $.ajax({
-      method: 'post',
-      url: `/api/cards/${card.id}`,
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
-      data: JSON.stringify(content),
-    }).then(() => {
-      boardStore.reload()
-    })
-  }
-
 
   render(){
     const { session } = this.context
@@ -196,7 +181,7 @@ export default class CardModal extends Component {
               </div>
               <div className="CardModal-content-copy">
                 <div className="CardModal-content-title">
-                  <EditCardNameForm />
+                  <EditCardNameForm card={this.props.card} />
                 </div>
                 <div className="CardModal-content-list">
                   <span className="CardModal-content-list-title">
@@ -279,31 +264,42 @@ const ArchiveCardButton = (props) => {
     card={props.card}
   />
 }
-const editCardNameForm = (props) => {
-  return <div>
-    <Form>
-
-    </Form>
-  </div>
-}
 
 class EditCardNameForm extends Component {
   constructor(props) {
     super(props)
-    this.state = {value: ''}
+    this.state = {value: this.props.card.content}
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
   handleChange(event) {
     this.setState({value: event.target.value})
+  }
+
+  updateName2(){
+    const card = this.props.card
+    console.log("banana", card.content)
+    $.ajax({
+      method: 'post',
+      url: `/api/cards/${card.id}`,
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify(this.state.value),
+    })
+  }
+
+  handleSubmit(event) {
+    console.log('Text field value is: ' + this.state.value)
+    updateName2(this.state.value)
   }
 
   render() {
     return (
       <div>
         <input type="text"
-          placeholder="Hello!"
           value={this.state.value}
-          onChange={this.handleChange} />
+          onChange={this.handleChange}
+          onBlur={this.updateName2} />
       </div>
     )
   }
