@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import $ from 'jquery'
 import DialogBox from '../DialogBox'
 import Button from '../Button'
 import Form from '../Form'
+import commands from '../../commands'
 import './RenameBoardDropdown.sass'
 
 export default class RenameBoardDropdown extends Component {
@@ -22,16 +22,8 @@ export default class RenameBoardDropdown extends Component {
       return
     }
     const { board } = this.props
-    $.ajax({
-      method: 'post',
-      url: `/api/boards/${board.id}`,
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
-      data: JSON.stringify({name: this.state.value}),
-    }).then(() => {
-      boardStore.reload()
-      this.props.onClose()
-    })
+    commands.updateBoardName(board.id, this.state.value)
+      .then(this.props.onClose)
   }
 
   onChangeHandler(event) {
@@ -48,7 +40,7 @@ export default class RenameBoardDropdown extends Component {
   }
 
   render() {
-    return <DialogBox className="RenameBoardDropdown" heading="Rename Board" onClose={this.props.onClose}>
+    return <DialogBox className="BoardShowPage-RenameBoardDropdown" heading="Rename Board" onClose={this.props.onClose}>
       <Form onSubmit={this.updateNameHandler}>
         <div>Name</div>
         <input

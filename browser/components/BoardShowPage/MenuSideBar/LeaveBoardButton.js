@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import Button from '../../Button'
-import $ from 'jquery'
-import boardsStore from '../../../stores/boardsStore'
 import ConfirmationButton from '../../ConfirmationButton'
+import commands from '../../../commands'
 
 export default class LeaveBoardButton extends Component {
 
@@ -16,19 +15,14 @@ export default class LeaveBoardButton extends Component {
   }
 
   leaveBoard(event){
-    $.ajax({
-      method: "POST",
-      url: `/api/boards/${this.props.boardId}/leave`,
-    }).then( () => {
-      this.context.redirectTo('/')
-      boardsStore.reload()
-    })
+    commands.leaveBoard(this.props.boardId)
+      .then(_ => this.context.redirectTo('/'))
   }
 
   render(){
     return <ConfirmationButton
       type="invisible"
-      className="BoardShowPage-MenuSideBar-options"
+      className="BoardShowPage-MenuSideBar-PaneButton BoardShowPage-MenuSideBar-LeaveBoardButton"
       onConfirm={this.leaveBoard}
       buttonName="Leave Board"
       title='Leave Board?'

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import $ from 'jquery'
 import Button from './Button'
 import Icon from './Icon'
+import commands from '../commands'
 import './BoardStar.sass'
 
 export default class BoardStar extends Component {
@@ -18,19 +18,18 @@ export default class BoardStar extends Component {
   toggleStar(event) {
     event.stopPropagation()
     event.preventDefault()
-    const starred = this.props.board.starred
-    $.ajax({
-      method: "POST",
-      url: `/api/boards/${this.props.board.id}/${ starred ? 'unstar' : 'star'}`,
-    }).then(() => {
-      if (this.props.onChange) this.props.onChange()
-    })
+    const { board, onChange } = this.props
+    commands.toggleStar(board.id, board.starred).then(onChange)
   }
 
   render(){
     const { board } = this.props
+    const className = this.props.className
+    ? `BoardStar ${this.props.className}`
+    : `BoardStar BoardStar-${board.starred ? 'active' : 'inactive'}`
+
     return <Button
-      className={`BoardStar BoardStar-${board.starred ? 'active' : 'inactive'}`}
+      className={className}
       type="unstyled"
       title="Click to star this board. It will show up at the top of your boards list."
       onClick={this.toggleStar}

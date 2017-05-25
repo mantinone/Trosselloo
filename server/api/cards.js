@@ -67,6 +67,42 @@ router.post('/:cardId/move', (request, response, next) => {
     .catch(next)
 })
 
+//CREATE COMMENT
+router.post('/:cardId/comments', (request, response, next) => {
+  const {cardId} = request.params
+  const {userId, content} = request.body
+
+  commands.addComment(cardId, userId, content)
+  .then(() => {
+    response.json(null)
+  })
+  .catch(next)
+})
+
+//UPDATE COMMENT
+router.post('/:cardId/comments/:commentId', (request, response, next) => {
+  const {commentId} = request.params
+  const {content} = request.body
+
+  commands.updateComment(commentId, content)
+  .then(() => {
+    response.json(null)
+  })
+  .catch(next)
+})
+
+//DELETE COMMENT
+router.post('/:cardId/comments/:commentId/delete', (request, response, next) => {
+  const {commentId} = request.params
+
+  commands.deleteComment(commentId)
+  .then(() => {
+    response.json(null)
+  })
+  .catch(next)
+
+})
+
 //ADD/REMOVE LABEL
 router.post('/:cardId/labels/:labelId', (request, response, next) => {
   let {cardId, labelId} = request.params
@@ -77,6 +113,28 @@ router.post('/:cardId/labels/:labelId', (request, response, next) => {
   })
   .catch(next)
 
+})
+
+router.post('/:cardId/users/add', (request, response, next) => {
+  const { boardId, targetId } = request.body
+  const { cardId } = request.params
+  const { userId } = request.session
+  commands.addUserToCard(userId, boardId, cardId, targetId)
+    .then( _ => {
+      response.json(null)
+    })
+    .catch(next)
+})
+
+router.post('/:cardId/users/remove', (request, response, next) => {
+  const { boardId, targetId } = request.body
+  const { cardId } = request.params
+  const { userId } = request.session
+  commands.removeUserFromCard(userId, boardId, cardId, targetId)
+    .then( _ => {
+      response.json(null)
+    })
+    .catch(next)
 })
 
 export default router

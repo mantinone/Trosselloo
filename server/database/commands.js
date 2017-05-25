@@ -43,6 +43,8 @@ const ACTIVITY_TYPES = [
   'ArchivedList',
   'UnarchivedList',
   'DeletedCard',
+  'AddedUserToCard',
+  'RemovedUserFromCard',
 ]
 
 const recordActivity = (attributes) => {
@@ -141,9 +143,7 @@ const findOrCreateUserFromGithubProfile = (githubProfile) => {
 
 const createUser = (attributes) =>
   createRecord('users', attributes)
-    .then(user =>
-      mailer.sendWelcomeEmail(user)
-        .then(() => user )
+    .then(user => user )
     )
 
 const updateUser = (id, attributes) =>{
@@ -630,18 +630,18 @@ const deleteBoard = (boardId) =>
 const createInvite = (currentUserId, attributes) => {
   attributes.token = uuid.v1()
   return createRecord('invites', attributes)
-    .then( invite =>
-      Promise.all([
-        recordActivity({
-          type: 'InvitedToBoard',
-          board_id: invite.boardId,
-          user_id: currentUserId,
-          metadata: {
-            invited_email: invite.email
-          }
-        }),
-        mailer.sendInviteEmail( invite )
-      ]).then( () => invite)
+  .then( invite =>
+    Promise.all([
+     recordActivity({
+        type: 'InvitedToBoard',
+        board_id: invite.boardId,
+        user_id: currentUserId,
+        metadata: {
+          invited_email: invite.email
+        }
+      }),
+      mailer.sendInviteEmail( invite )
+    ]).then(() => invite )
     )
 }
 
@@ -653,7 +653,18 @@ const searchQuery = ( userId, searchTerm ) => {
 }
 
 const createLabel = (attributes) =>
-  createRecord('labels',attributes)
+  createRecord('labels', {
+    board_id: attributes.board_id,
+    color: attributes.color,
+    text: attributes.text,
+    id: attributes.id,
+  })
+    .then(label =>
+      attributes.card_id !== undefined
+        ? addOrRemoveCardLabel(attributes.card_id, label.id)
+          .then(() => label)
+        : label
+    )
 
 const updateLabel = (labelId, attributes) =>
   updateRecord('labels', labelId, attributes)
@@ -681,6 +692,61 @@ const addOrRemoveCardLabel = (cardId, labelId) => {
         .del()
       }
     })
+  }
+
+  const addComment = (cardId, userId, content) =>
+    createRecord('comments', { card_id: cardId, user_id: userId, content:  content })
+
+  const updateComment = (id, content) =>
+    updateRecord('comments', id, {updated_at: new Date(), content})
+
+  const deleteComment = (id) =>
+    deleteRecord('comments', id)
+
+const addUserToCard = (currentUserId, boardId, cardId, targetUserId) => {
+  const attributes = {
+    board_id: boardId,
+    card_id: cardId,
+    user_id: targetUserId
+  }
+
+  const insert = knex
+    .table('card_users' )
+    .insert(attributes)
+
+
+  return knex.raw(`${insert} ON CONFLICT DO NOTHING RETURNING *`)
+    .then( cardUser => {
+      return recordActivity({
+        type: 'AddedUserToCard',
+        board_id: boardId,
+        card_id: cardId,
+        user_id: currentUserId,
+        metadata: {
+          added_card_user: targetUserId
+        }
+      })
+    })
+}
+
+const removeUserFromCard = (currentUserId, boardId, cardId, targetUserId) => {
+  const attributes = {board_id: boardId, card_id: cardId, user_id: targetUserId}
+
+  return knex.table('card_users')
+    .select('*')
+    .where(attributes)
+    .del()
+    .then( deletion =>
+      recordActivity({
+        type: 'RemovedUserFromCard',
+        board_id: boardId,
+        card_id: cardId,
+        user_id: currentUserId,
+        metadata: {
+          removed_card_user: targetUserId
+        }
+      }).then( _ => deletion)
+    )
 }
 
 export default {
@@ -721,4 +787,9 @@ export default {
   updateLabel,
   deleteLabel,
   recordActivity,
+  addComment,
+  updateComment,
+  deleteComment,
+  addUserToCard,
+  removeUserFromCard,
 }

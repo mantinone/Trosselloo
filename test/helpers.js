@@ -9,18 +9,21 @@ const withTwoUsersInTheDatabase = (callback) => {
           github_id: 22312,
           name: 'Mark Zuckerburg',
           email: 'mark@zuckerburg.io',
+          avatar_url: 'https://thumbs.dreamstime.com/t/android-robot-thumb-up-22927887.jpg',
         }),
         commands.createUser({
           id: 6672,
           github_id: 9775,
           name: 'Larry Harvey',
           email: 'larry@harvey.to',
+          avatar_url: 'https://thumbs.dreamstime.com/t/android-robot-thumb-up-22927887.jpg',
         }),
         commands.createUser({
           id: 10000,
           github_id: 5000,
           name: 'Bob Taylor',
-          email: 'bob@bob.com'
+          email: 'bob@bob.com',
+          avatar_url: 'https://thumbs.dreamstime.com/t/android-robot-thumb-up-22927887.jpg',
         })
       ])
     })
@@ -128,6 +131,8 @@ const withBoardsListsAndCardsInTheDatabase = (callback) => {
         ).then( () =>
           commands.addOrRemoveCardLabel(90, 301)
         ).then( () =>
+          commands.addComment(80, 1455, 'old comment')
+        ).then( () =>
           commands.createBoard(1455, {
             id: 102,
             name: 'Board2',
@@ -159,6 +164,8 @@ const withBoardsListsAndCardsInTheDatabase = (callback) => {
             board_id: 104,
             content: 'Not happy on board 2'
           })
+        ).then( () =>
+          commands.addUserToCard(1455, 101, 87, 1455)
         )
       })
       callback()

@@ -52,7 +52,7 @@ $ git remote add upstream https://github.com/GuildCrafts/Trossello.git
 #### Install Postgres
 
 ```sh
-brew install postgress
+brew install postgresql
 brew tap homebrew/services
 brew services start postgresql
 ```
@@ -150,6 +150,27 @@ We're using `knex` to generate our SQL
 | updateCard()         | update | post | /api/cards/:cardId                       |
 | deleteCard()         | delete | post | /api/cards/:cardId/delete                |
 
+### Standards For Creating New Components
+- Each new Component should be created in its own file where possible.
+
+- Large Component files should be split up into new subcomponent files.
+
+- A Component with multiple subcomponents should be reorganized into a Component directory:
+  - The Component sharing the folder name should be renamed to index.js and have an accompanying index.sass file.
+
+  - Everything inside the Component directory should only be rendered as a subcomponent of the index Component.
+
+  - Components with many subcomponents of the same type (ex: menu panes) can have a directory for organizing those Components, which should be named in lower case.
+
+- Component file and directory names should be in UpperCamelCase.
+
+- Class names for Components inside of a Component directory should start with the Component directory name.
+(ex: BoardShowPage/CardModal/LabelMenu -> .BoardShowPage-CardModal-LabelMenu)
+
+- Each Component can optionally import ONE sass file of the same name. You should never import other Components' sass files.
+
+- Each Component sass file should only declare css selectors with that Component's name as a prefix.
+
 ### Contributors
 
 - [deadlyicon](https://github.com/deadlyicon)
@@ -164,3 +185,5 @@ We're using `knex` to generate our SQL
 - [jason00111](https://github.com/jason00111)
 - [ASantos3026](https://github.com/ASantos3026)
 - [salmonax](https://github.com/salmonax)
+- [nodatall](https://github.com/nodatall)
+- [ameliavoncat](https://github.com/ameliavoncat)
