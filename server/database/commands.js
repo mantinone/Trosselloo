@@ -143,9 +143,7 @@ const findOrCreateUserFromGithubProfile = (githubProfile) => {
 
 const createUser = (attributes) =>
   createRecord('users', attributes)
-    .then(user =>
-      mailer.sendWelcomeEmail(user)
-        .then(() => user )
+    .then(user => user )
     )
 
 const updateUser = (id, attributes) =>{
